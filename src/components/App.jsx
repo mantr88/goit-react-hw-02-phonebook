@@ -4,6 +4,11 @@ import { ContactForm } from "./ContactForm/ContactForm";
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 
+//залишилось зробити:
+// 1. Виділити карточку контакта в окркмий елемент;
+// 2. Прописати prop - type;
+// 3. Стилізація;
+// 4. Підчистити код: деструктуризація, консолі, зайві рядки,
 
 export class App extends Component  {
   state = {
