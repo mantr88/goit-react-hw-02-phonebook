@@ -7,6 +7,6 @@ export const List = styled.ul`
     }
 
     p{
-        margin-left: 15px;
+        margin-left: 5px;
     }
 `;

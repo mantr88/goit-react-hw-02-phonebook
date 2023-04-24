@@ -4,16 +4,16 @@ import { nanoid } from 'nanoid';
 import { Form, ErrorMessage, FormField, Field } from './ContactForm.styled';
 
 const UserSchema = Yup.object().shape({
-  name: Yup.string().required('Requered field'),
-  number: Yup.number().min(6, 'Too Short!')
-     .max(13, 'Too Long!').required('Requered field')
+  name: Yup.string().matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/).required('Requered field'),
+  number: Yup.string().matches(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/).max(9, 'Must be < 9!').min(4, 'Must be > 4!').required('Requered field')
 })
 
 export const ContactForm = ({addContact}) => {
     return (
         <Formik
       initialValues={{
-        name: '',
+          name: '',
+          number: '',
       }}
       validationSchema={UserSchema}
       onSubmit={(values, actions) => {

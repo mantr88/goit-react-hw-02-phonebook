@@ -5,7 +5,7 @@ export const ContactList = ({contacts}) => {
             <List>
             {contacts.map(contact => (
                     <li key={contact.id}>
-                    <p>{contact.name}</p>
+                    <p>{contact.name}</p> :
                     <p>{contact.number}</p>
                     </li>
                 ))}
