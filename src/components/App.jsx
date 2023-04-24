@@ -7,7 +7,8 @@ import { ContactList } from './ContactList/ContactList';
 export class App extends Component  {
   state = {
     contacts: [],
-    name: ''
+    name: '',
+    number: ''
   };
 
   addContact = newContact => {
@@ -29,12 +30,3 @@ export class App extends Component  {
   };
   
 };
-
-{/* <div>
-  <h1>Phonebook</h1>
-  <ContactForm ... />
-
-  <h2>Contacts</h2>
-  <Filter ... />
-  <ContactList ... />
-</div> */}
