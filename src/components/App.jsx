@@ -1,14 +1,12 @@
 import { Component } from 'react';
-import { GlobalStyle } from './GlobalStyle';
+import { GlobalStyle } from './Utils/GlobalStyle';
 import { ContactForm } from "./ContactForm/ContactForm";
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './Utils/Theme';
+import { Layout } from './Layout/Layout';
 
-//залишилось зробити:
-// 1. Виділити карточку контакта в окркмий елемент;
-// 2. Прописати prop - type;
-// 3. Стилізація;
-// 4. Підчистити код: деструктуризація, консолі, зайві рядки,
 
 export class App extends Component  {
   state = {
@@ -40,7 +38,7 @@ export class App extends Component  {
   deleteContact = contactId => {
     this.setState(pervState => ({
       contacts: pervState.contacts.filter(contact => contact.id !== contactId),
-    }))
+    }));
   };
 
   changeFilter = e => {
@@ -56,15 +54,16 @@ export class App extends Component  {
 
 
     return(
-    <div>
+      <ThemeProvider theme={theme}>
+        <Layout>
         <h1>Phonebook</h1>
         <ContactForm addContact={this.addContact} />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList contacts={visibleContacts} onDelete={this.deleteContact} />
         <GlobalStyle />
-    </div>
+        </Layout>
+    </ThemeProvider>
   );
-  };
-  
+  }; 
 };

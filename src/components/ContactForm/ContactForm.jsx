@@ -1,23 +1,26 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 import { Form, ErrorMessage, FormField, Field } from './ContactForm.styled';
 
+const regExpForName = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
+const regExpForNumber = /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
+
 const UserSchema = Yup.object().shape({
-  name: Yup.string().matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/).required('Requered field'),
-  number: Yup.string().matches(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/).max(9, 'Must be < 9!').min(4, 'Must be > 4!').required('Requered field')
+  name: Yup.string().matches(regExpForName).required('Requered field'),
+  number: Yup.string().matches(regExpForNumber, 'Invalid phone number').max(17, 'Must be < 17!').min(4, 'Must be > 4!').required('Requered field')
 })
 
 export const ContactForm = ({addContact}) => {
     return (
-        <Formik
+    <Formik
       initialValues={{
           name: '',
           number: '',
       }}
       validationSchema={UserSchema}
       onSubmit={(values, actions) => {
-        console.log(values);
         addContact({...values, id: nanoid()})
         actions.resetForm();
       }}
@@ -44,4 +47,8 @@ export const ContactForm = ({addContact}) => {
       </Form>
     </Formik>
     )
+};
+
+ContactForm.propTypes = {
+  addContact: PropTypes.func.isRequired
 };
